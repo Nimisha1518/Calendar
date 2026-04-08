@@ -1,0 +1,249 @@
+.calendarContainer {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: var(--paper);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--glass-border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calendarContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 25px 30px -5px rgba(0, 0, 0, 0.12),
+    0 15px 15px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Spiral Binder Effect */
+.binder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, #e2e8f0, #f8fafc);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 10;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ring {
+  width: 12px;
+  height: 24px;
+  background: linear-gradient(to right, #94a3b8, #cbd5e1, #94a3b8);
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+  padding-top: 40px; /* Space for binder */
+}
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroSection {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  min-height: 300px;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.heroOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: white;
+}
+
+.monthLabel {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+}
+
+.yearLabel {
+  font-size: 1.5rem;
+  font-weight: 300;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.gridSection {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.navButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navButton {
+  background: var(--primary-light);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 12px;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+.weekdayGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 1rem;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  color: var(--secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dateGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.dateCell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.dateCell:hover:not(.outsideMonth) {
+  background: var(--date-hover);
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.outsideMonth {
+  color: #cbd5e1;
+  cursor: default;
+}
+
+.selectedDate {
+  background: var(--date-selected) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.rangeMiddle {
+  background: var(--date-range);
+  border-radius: 0;
+  color: var(--primary);
+}
+
+.rangeStart {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.rangeEnd {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Notes Section */
+.notesSection {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+}
+
+.notesHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.notesInput {
+  width: 100%;
+  min-height: 80px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 0.75rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--foreground);
+  resize: none;
+  transition: all 0.2s ease;
+}
+
+.notesInput:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.5);
+  border-color: var(--primary-light);
+}
+
+@media (max-width: 640px) {
+  .calendarContainer {
+    margin: 1rem;
+    border-radius: 16px;
+  }
+  
+  .monthLabel {
+    font-size: 2.5rem;
+  }
+}
